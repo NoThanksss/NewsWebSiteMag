@@ -26,7 +26,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                var result = _userService.UpdateUser(user);
+                var result = await _userService.UpdateUserAsync(user);
 
                 return Ok(result);
             }
@@ -47,7 +47,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                _userService.DeleteUser(id);
+                await _userService.DeleteUserAsync(id);
 
                 return Ok("User was deleted");
             }
@@ -68,7 +68,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                var result = _userService.GetAllUsers();
+                var result = await _userService.GetAllUsersAsync();
 
                 return Ok(result);
             }
@@ -89,7 +89,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                var result = _userService.GetUserById(id);
+                var result = await _userService.GetUserByIdAsync(id);
 
                 return Ok(result);
             }

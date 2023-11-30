@@ -20,38 +20,38 @@ namespace NewsWebSite_DAL.Repositories
             _dbSet = _context.Set<UserDB>();
         }
 
-        public IEnumerable<UserDB> GetAll()
+        public IQueryable<UserDB> GetAllAsync()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsQueryable();
         }
 
-        public UserDB UpdateEntity(UserDB entity)
+        public async Task<UserDB> UpdateEntityAsync(UserDB entity)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public UserDB AddEntity(UserDB entity)
+        public async Task<UserDB> AddEntityAsync(UserDB entity)
         {
-            _dbSet.Add(entity);
-            _context.SaveChanges();
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public UserDB GetById(Guid id)
+        public async Task<UserDB> GetByIdAsync(Guid id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public Task DeleteEntity(Guid id)
+        public async Task DeleteEntityAsync(Guid id)
         {
-            var entityToRemove = _dbSet.Find(id);
+            var entityToRemove = await _dbSet.FindAsync(id);
             _dbSet.Remove(entityToRemove);
 
-            return Task.FromResult(_context.SaveChanges());
+            await _context.SaveChangesAsync();
         }
     }
 }

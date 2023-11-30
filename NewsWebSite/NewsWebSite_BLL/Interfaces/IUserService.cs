@@ -4,10 +4,10 @@ namespace NewsWebSite_BLL.Interfaces
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAllUsers();
-        User AddNewUser(User user);
-        void DeleteUser(Guid id);
-        User UpdateUser(User updatedUser);
-        User GetUserById(Guid id);
+        Task<IEnumerable<User>> GetAllUsersAsync();
+        Task<User> AddNewUserAsync(User user);
+        Task DeleteUserAsync(Guid id);
+        Task<User> UpdateUserAsync(User updatedUser);
+        Task<User> GetUserByIdAsync(Guid id);
     }
 }

@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NewsWebSite_BLL.Models.Account">
+    <Position X="2" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAEAAAAAAAAAAAAAAAAgAAAAAAAAAAAAQQAAAAAg=</HashCode>
+      <FileName>Models\Account.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.Article">
+    <Position X="3.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAEAAAgAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\Article.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.ArticleTheme">
+    <Position X="5.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ArticleTheme.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.AuthResponse">
+    <Position X="7.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Models\AuthResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.Comment">
+    <Position X="9" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
+      <FileName>Models\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.LoginModel">
+    <Position X="10.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LoginModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.RegisterModel">
+    <Position X="14.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAICAAAAAQAQAgAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\RegisterModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.SubscribeModel">
+    <Position X="10.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Models\SubscribeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Models.User">
+    <Position X="12.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAICAAAAAQAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.AccountService" BaseTypeListCollapsed="true">
+    <Position X="2" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAIAAAAQAAAABAAAAIAACAAAAgEAAAAAAAAE=</HashCode>
+      <FileName>Services\AccountService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.ArticleService" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgEAIIAAAARAAABBAAAAIAAAAAAQAAAAAQAAAgA=</HashCode>
+      <FileName>Services\ArticleService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.ArticleThemeService" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACAAAIAAAACAAABBAAAAKAIAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Services\ArticleThemeService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.AuthService" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAABAIAAIAAAAAAQAAAAAAEAAAAAAAgAAAEAAAAAAA=</HashCode>
+      <FileName>Services\AuthService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.CommentService" BaseTypeListCollapsed="true">
+    <Position X="9" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAABBAAAIAAAAAAAAAQAEABAIBA=</HashCode>
+      <FileName>Services\CommentService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.JwtHandler">
+    <Position X="14.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAgIAAAACIAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Services\JwtHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.MailService" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\MailService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Services.UserService" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAgAIAAAQAAAAABAAAAIAABAAAACAAAAAQAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_BLL.Exceptions.AccountServiceException">
+    <Position X="2" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\AccountServiceException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Exceptions.ArticleThemeServiceException">
+    <Position X="5.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\AccountThemeServiceException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Exceptions.ArticleServiceException">
+    <Position X="3.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\ArticleServiceException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Exceptions.CommentServiceException">
+    <Position X="8.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\CommentServiceException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Exceptions.MailServiceException">
+    <Position X="10.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\MailServiceException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Exceptions.UserServiceException">
+    <Position X="12.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Exceptions\UserServiceException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Attributes.JsonPropertyWithSensitiveDataAttribute" Collapsed="true">
+    <Position X="16" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\JsonPropertyWithSensitiveDataAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Attributes.NotLoggingAttribute" Collapsed="true">
+    <Position X="16" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\NotLoggingAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Attributes.SwaggerExcludeAttribute" Collapsed="true">
+    <Position X="16" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Attributes\SwaggerExcludeAttribute.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Builders.ServiceProviderBuilder">
+    <Position X="16" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAQCAAAAAA=</HashCode>
+      <FileName>Builders\ServiceProviderBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Extensions.SerializationExtensions">
+    <Position X="16" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Extensions\SerializationExtensions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Mapping.AccountMappingProfile">
+    <Position X="2" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapping\AccountMappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Mapping.ArticleMappingProfile">
+    <Position X="3.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapping\ArticleMappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Mapping.ArticleThemeMappingProfile">
+    <Position X="5.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapping\ArticleThemeMappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Mapping.CommentMappingProfile">
+    <Position X="8.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapping\CommentMappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_BLL.Mapping.UserMappingProfile">
+    <Position X="12.5" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Mapping\UserMappingProfile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="NewsWebSite_BLL.Interfaces.IAccountService">
+    <Position X="2" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAACAAAAgEAAAAAAAAE=</HashCode>
+      <FileName>Interfaces\IAccountService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_BLL.Interfaces.IArticleService">
+    <Position X="3.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgEAIAAAAABAAAAAAAAAAAAAAAAQAAAAAQAAAgA=</HashCode>
+      <FileName>Interfaces\IArticleService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_BLL.Interfaces.IArticleThemeService">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgACAAAAAAAACAAAAAAAAACAIAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Interfaces\IArticleThemeService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_BLL.Interfaces.IAuthService">
+    <Position X="7.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAuthService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_BLL.Interfaces.ICommentService">
+    <Position X="9" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAABAAAAAAAAAAAAAQAEABAIAA=</HashCode>
+      <FileName>Interfaces\ICommentService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_BLL.Interfaces.IMailService">
+    <Position X="10.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMailService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_BLL.Interfaces.IUserService">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAQAAAAAAAAAAAAABAAAACAAAAAQAAAA=</HashCode>
+      <FileName>Interfaces\IUserService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using NewsWebSite_BLL.Exceptions;
@@ -13,20 +14,23 @@ namespace NewsWebSite_BLL.Services
     {
         private readonly IMapper _mapper;
         private readonly IAccountRepository _accountRepository;
+        private readonly IMemoryCache _cache;
         private readonly ILogger<AccountService> _logger;
 
-        public AccountService(IMapper mapper, IAccountRepository accountRepository, ILogger<AccountService> logger)
+        public AccountService(IMapper mapper, IAccountRepository accountRepository, ILogger<AccountService> logger, IMemoryCache cache)
         {
             _mapper = mapper;
             _accountRepository = accountRepository;
             _logger = logger;
+            _cache = cache;
         }    
 
-        public IEnumerable<Account> GetAllAccounts()
+        public async Task<IEnumerable<Account>> GetAllAccountsAsync()
         {
             try
-            { 
-                return _mapper.Map<List<Account>>(_accountRepository.GetAll());
+            {
+                var accounts = await _accountRepository.GetAllAsync().ToListAsync();
+                return _mapper.Map<List<Account>>(accounts);
             }
             catch (Exception ex)
             {
@@ -35,27 +39,12 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public Account AddNewAccount(Account account)
-        {
-            try
-            { 
-                var accountToAdd = _mapper.Map<AccountDB>(account);
-                var newAccount = _accountRepository.AddEntity(accountToAdd);
-
-                return _mapper.Map<Account>(newAccount);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Exception in AddNewAccount method");
-                throw new AccountServiceException(ex.Message);
-            }
-        }
-
-        public void DeleteAccount(Guid id)
+        public async Task DeleteAccountAsync(Guid id)
         {
             try 
             { 
-                _accountRepository.DeleteEntity(id);
+                await _accountRepository.DeleteEntityAsync(id);
+                _cache.Remove(id.ToString());
             }
             catch (Exception ex)
             {
@@ -64,17 +53,24 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public Account UpdateAccount(Account updatedAccount)
+        public async Task<Account> UpdateAccountAsync(Account updatedAccount)
         {
             try 
             {
                 var mappedAccount = _mapper.Map<AccountDB>(updatedAccount);
-                var existingAccount = _accountRepository.GetById(Guid.Parse(mappedAccount.Id));
+                var existingAccount = await _accountRepository.GetByIdAsync(Guid.Parse(mappedAccount.Id));
                 existingAccount.FirstName = mappedAccount.FirstName;
                 existingAccount.LastName = mappedAccount.LastName;
                 existingAccount.UserDBId = mappedAccount.UserDBId;
 
-                return _mapper.Map<Account>(_accountRepository.UpdateEntity(existingAccount));
+                var result = await _accountRepository.UpdateEntityAsync(existingAccount);
+                if (result != null)
+                {
+                    _cache.Set(result.Id, result,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
+
+                return _mapper.Map<Account>(result);
             }
             catch (Exception ex)
             {
@@ -85,27 +81,19 @@ namespace NewsWebSite_BLL.Services
 
         public async Task<Account> GetAccountByIdAsync(Guid id)
         {
-            try 
-            { 
-                var account = await _accountRepository.GetByIdAsync(id);
-
-                return _mapper.Map<Account>(account);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Exception in GetAccountByIdAsync method");
-                throw new AccountServiceException(ex.Message);
-            }
-        }
-        public Account GetAccountById(Guid id)
-        {
             try
-            { 
-                var account = _accountRepository.GetById(id);
-                if (account == null)
+            {
+                AccountDB account = null;
+                if (!_cache.TryGetValue(id.ToString(), out account))
                 {
-                    _logger.LogError($"Account with id {id} doesn't exist.");
-                    throw new AccountServiceException($"Account with id {id} doesn't exist.");
+                    account = await _accountRepository.GetByIdAsync(id);
+                    if (account == null)
+                    {
+                        _logger.LogError($"Account with id {id} doesn't exist.");
+                        throw new AccountServiceException($"Account with id {id} doesn't exist.");
+                    }
+                    _cache.Set(account.Id, account,
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
                 }
 
                 return _mapper.Map<Account>(account);
@@ -117,12 +105,12 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public void Subscribe(Guid authorId, Guid subscriberId)
+        public async Task Subscribe(Guid authorId, Guid subscriberId)
         {
             try
             {
-                var authorAccount = _accountRepository.GetById(authorId);
-                var subscriberAccount = _accountRepository.GetById(subscriberId);
+                var authorAccount = await _accountRepository.GetByIdAsync(authorId);
+                var subscriberAccount = await _accountRepository.GetByIdAsync(subscriberId);
 
                 if (authorAccount.Subscibers == null)
                 {
@@ -136,8 +124,15 @@ namespace NewsWebSite_BLL.Services
                 authorAccount.Subscibers.Add(subscriberAccount);
                 subscriberAccount.Subscribtions.Add(authorAccount);
 
-                var updatedAuthor = _accountRepository.UpdateEntity(authorAccount);
-                var updatedSub = _accountRepository.UpdateEntity(subscriberAccount);
+                var updatedAuthor = await _accountRepository.UpdateEntityAsync(authorAccount);
+                var updatedSub = await _accountRepository.UpdateEntityAsync(subscriberAccount);
+                if (updatedAuthor != null && updatedSub != null)
+                {
+                    _cache.Set(updatedAuthor.Id, updatedAuthor,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                    _cache.Set(updatedSub.Id, updatedSub,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
             }
             catch (Exception ex)
             {

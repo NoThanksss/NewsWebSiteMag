@@ -9,7 +9,7 @@ namespace NewsWebSite_DAL.Interfaces
 {
     public interface IArticleRepository :IBaseRepository<ArticleDB>
     {
-        IEnumerable<ArticleDB> GetAllWithThemeDbs();
-        ArticleDB UpdateThemes(ArticleDB entity, List<Guid> themesToAdd, List<Guid> themesToRemove);
+        IQueryable<ArticleDB> GetAllWithThemeDbsAsync();
+        Task<ArticleDB> UpdateThemesAsync(ArticleDB entity, List<Guid> themesToAdd, List<Guid> themesToRemove);
     }
 }

@@ -9,6 +9,6 @@ namespace NewsWebSite_DAL.Interfaces
 {
     public interface IArticleThemeRepository : IBaseRepository<ArticleThemeDB>
     {
-        IEnumerable<ArticleThemeDB> GetAllWithArticles();
+        Task<IEnumerable<ArticleThemeDB>> GetAllWithArticlesAsync();
     }
 }

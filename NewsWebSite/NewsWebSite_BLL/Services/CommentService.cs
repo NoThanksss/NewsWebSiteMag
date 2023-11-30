@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NewsWebSite_BLL.Exceptions;
 using NewsWebSite_BLL.Interfaces;
@@ -26,11 +27,12 @@ namespace NewsWebSite_BLL.Services
         }
 
 
-        public IEnumerable<Comment> GetAllComments()
+        public async Task<IEnumerable<Comment>> GetAllCommentsAsync()
         {
             try
             {
-                return _mapper.Map<List<Comment>>(_commentRepository.GetAll());
+                var comments = await _commentRepository.GetAllAsync().ToListAsync();
+                return _mapper.Map<List<Comment>>(comments);
             }
             catch (Exception ex)
             {
@@ -39,12 +41,12 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public Comment AddNewComment(Comment comment)
+        public async Task<Comment> AddNewCommentAsync(Comment comment)
         {
             try
             {
                 var commentToAdd = _mapper.Map<CommentDB>(comment);
-                var newComment = _commentRepository.AddEntity(commentToAdd);
+                var newComment = await _commentRepository.AddEntityAsync(commentToAdd);
 
                 return _mapper.Map<Comment>(newComment);
             }
@@ -55,11 +57,11 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public void DeleteComment(Guid id)
+        public async Task DeleteCommentAsync(Guid id)
         {
             try
             {
-                _commentRepository.DeleteEntity(id);
+                await _commentRepository.DeleteEntityAsync(id);
             }
             catch (Exception ex)
             {
@@ -68,13 +70,14 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public Comment UpdateComment(Comment updatedComment)
+        public async Task<Comment> UpdateCommentAsync(Comment updatedComment)
         {
             try
             {
                 var mappedComment = _mapper.Map<CommentDB>(updatedComment);
+                var result = await _commentRepository.UpdateEntityAsync(mappedComment);
 
-                return _mapper.Map<Comment>(_commentRepository.UpdateEntity(mappedComment));
+                return _mapper.Map<Comment>(result);
             }
             catch (Exception ex)
             {
@@ -83,11 +86,11 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public Comment GetCommentById(Guid id)
+        public async Task<Comment> GetCommentByIdAsync(Guid id)
         {
             try
             {
-                var comment = _commentRepository.GetById(id);
+                var comment = await _commentRepository.GetByIdAsync(id);
                 if (comment == null)
                 {
                     _logger.LogError($"Comment with id {id} doesn't exist.");
@@ -103,11 +106,13 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public IEnumerable<Comment> GetCommentsByArticleId(Guid articleId)
+        public async Task<IEnumerable<Comment>> GetCommentsByArticleIdAsync(Guid articleId)
         {
             try
             {
-                return _mapper.Map<List<Comment>>(_commentRepository.GetAll().Where(x => x.ArticleId == articleId));
+                var comments = await _commentRepository.GetAllAsync().Where(x => x.ArticleId == articleId).ToListAsync();
+
+                return _mapper.Map<List<Comment>>(comments);
             }
             catch (Exception ex)
             {

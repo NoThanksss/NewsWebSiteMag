@@ -4,13 +4,11 @@ namespace NewsWebSite_BLL.Interfaces
 {
     public interface IAccountService
     {
-        IEnumerable<Account> GetAllAccounts();
-        Account AddNewAccount(Account account);
-        void DeleteAccount(Guid id);
-        Account UpdateAccount(Account updatedAccount);
+        Task<IEnumerable<Account>> GetAllAccountsAsync();
+        Task DeleteAccountAsync(Guid id);
+        Task<Account> UpdateAccountAsync(Account updatedAccount);
         Task<Account> GetAccountByIdAsync(Guid id);
-        Account GetAccountById(Guid id);
-        void Subscribe(Guid authorId, Guid subscriberId);
+        Task Subscribe(Guid authorId, Guid subscriberId);
 
     }
 }

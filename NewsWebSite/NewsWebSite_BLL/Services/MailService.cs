@@ -1,17 +1,14 @@
 ﻿using NewsWebSite_BLL.Interfaces;
-using MimeKit;
-using MailKit.Net.Smtp;
-using NewsWebSite_BLL.Exceptions;
 using NewsWebSite_BLL.Models;
-using System.Text;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace NewsWebSite_BLL.Services
 {
     public class MailService : IMailService
     {
         private readonly HttpClient client;
-        public MailService(IHttpClientFactory factory)
+        public MailService(IHttpClientFactory factory) 
         {
             client = factory.CreateClient();
         }

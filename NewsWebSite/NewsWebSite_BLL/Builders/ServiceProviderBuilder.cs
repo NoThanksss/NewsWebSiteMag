@@ -35,6 +35,7 @@ namespace NewsWebSite_BLL.Builders
 
         public static IServiceCollection ConfigureServices(this IServiceCollection serviceCollection)
         {
+            serviceCollection.AddMemoryCache();
             serviceCollection.AddAutoMapper(typeof(UserMappingProfile).Assembly);
             serviceCollection.AddHttpClient();
             serviceCollection.AddScoped<IMailService, MailService>();
@@ -87,7 +88,7 @@ namespace NewsWebSite_BLL.Builders
             var _admin = await userManager.FindByEmailAsync(admin.Email);
             if (_admin == null)
             {
-                var _adminProfile = userRepository.AddEntity(adminProfile);
+                var _adminProfile = await userRepository.AddEntityAsync(adminProfile);
                 admin.UserDBId = _adminProfile.Id;
 
                 var createPowerUser = await userManager.CreateAsync(admin, "Admin@123");

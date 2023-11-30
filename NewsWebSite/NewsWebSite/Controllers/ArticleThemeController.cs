@@ -26,7 +26,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleThemeService.AddNewArticleTheme(articleTheme);
+                var result = await _articleThemeService.AddNewArticleThemeAsync(articleTheme);
 
                 return Ok(result);
             }
@@ -48,7 +48,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleThemeService.UpdateArticleTheme(articleTheme);
+                var result = await _articleThemeService.UpdateArticleThemeAsync(articleTheme);
 
                 return Ok(result);
             }
@@ -70,7 +70,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                _articleThemeService.DeleteArticleTheme(id);
+                await _articleThemeService.DeleteArticleThemeAsync(id);
 
                 return Ok("articleTheme was deleted");
             }   
@@ -91,7 +91,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleThemeService.GetAllArticleThemes();
+                var result = await _articleThemeService.GetAllArticleThemesAsync();
 
                 return Ok(result);
             }
@@ -112,7 +112,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleThemeService.GetArticleThemeById(id);
+                var result = await _articleThemeService.GetArticleThemeByIdAsync(id);
 
                 return Ok(result);
             }
@@ -133,7 +133,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleThemeService.GetArticleThemesByArticleId(id);
+                var result = await _articleThemeService.GetArticleThemesByArticleIdAsync(id);
 
                 return Ok(result);
             }

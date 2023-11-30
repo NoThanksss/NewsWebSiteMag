@@ -1,5 +1,6 @@
 ﻿using NewsWebSite_BLL.Attributes;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace NewsWebSite_BLL.Models
 {

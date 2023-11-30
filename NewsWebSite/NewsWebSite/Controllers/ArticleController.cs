@@ -21,12 +21,11 @@ namespace NewsWebSite.Controllers
         }
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddNewArticle([FromBody] Article article)
         {
             try
             {
-                var result = _articleService.AddNewArticle(article);
+                var result = await _articleService.AddNewArticleAsync(article);
 
                 return Ok(result);
             }
@@ -47,7 +46,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleService.UpdateArticle(article);
+                var result = await _articleService.UpdateArticleAsync(article);
 
                 return Ok(result);
             }
@@ -68,7 +67,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                _articleService.DeleteArticle(id);
+                await _articleService.DeleteArticleAsync(id);
 
                 return Ok("Article was deleted");
             }
@@ -89,7 +88,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleService.GetAllArticles();
+                var result = await _articleService.GetAllArticlesAsync();
 
                 return Ok(result);
             }
@@ -110,7 +109,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleService.GetArticleById(id);
+                var result = await _articleService.GetArticleByIdAsync(id);
 
                 return Ok(result);
             }
@@ -131,7 +130,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleService.GetArticlesByAccountId(id);
+                var result = await _articleService.GetArticlesByAccountIdAsync(id);
 
                 return Ok(result);
             }
@@ -152,7 +151,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleService.ChangeArticleThemes(id, themeIds);
+                var result = await _articleService.ChangeArticleThemesAsync(id, themeIds);
 
                 return Ok(result);
             }
@@ -173,7 +172,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _articleService.GetArticlesByThemeId(id);
+                var result = await _articleService.GetArticlesByThemeIdAsync(id);
 
                 return Ok(result);
             }

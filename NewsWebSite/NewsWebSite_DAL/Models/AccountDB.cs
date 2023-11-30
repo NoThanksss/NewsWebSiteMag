@@ -5,7 +5,6 @@ namespace NewsWebSite_DAL.Models
 {
     public class AccountDB : IdentityUser
     {
-        //public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Guid UserDBId { get; set; }

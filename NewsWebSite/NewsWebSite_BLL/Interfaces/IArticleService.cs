@@ -1,21 +1,16 @@
 ﻿using NewsWebSite_BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NewsWebSite_BLL.Interfaces
 {
     public interface IArticleService
     {
-        IEnumerable<Article> GetAllArticles();
-        Article AddNewArticle(Article article);
-        void DeleteArticle(Guid id);
-        Article UpdateArticle(Article updatedAccount);
-        Article GetArticleById(Guid id);
-        IEnumerable<Article> GetArticlesByAccountId(Guid accountId);
-        IEnumerable<Article> GetArticlesByThemeId(Guid themeId);
-        Article ChangeArticleThemes(Guid id, Guid[] themeIds);
+        Task<IEnumerable<Article>> GetAllArticlesAsync();
+        Task<Article> AddNewArticleAsync(Article article);
+        Task DeleteArticleAsync(Guid id);
+        Task<Article> UpdateArticleAsync(Article updatedAccount);
+        Task<Article> GetArticleByIdAsync(Guid id);
+        Task<IEnumerable<Article>> GetArticlesByAccountIdAsync(Guid accountId);
+        Task<IEnumerable<Article>> GetArticlesByThemeIdAsync(Guid themeId);
+        Task<Article> ChangeArticleThemesAsync(Guid id, Guid[] themeIds);
     }
 }

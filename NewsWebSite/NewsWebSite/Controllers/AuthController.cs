@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MimeKit;
+using MailKit.Net.Smtp;
 using NewsWebSite_BLL.Interfaces;
 using NewsWebSite_BLL.Models;
 

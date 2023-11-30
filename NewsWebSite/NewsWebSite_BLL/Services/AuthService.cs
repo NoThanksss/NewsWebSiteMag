@@ -4,6 +4,7 @@ using NewsWebSite_BLL.Interfaces;
 using NewsWebSite_BLL.Models;
 using NewsWebSite_DAL.Models;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace NewsWebSite_BLL.Services
 {
@@ -12,13 +13,15 @@ namespace NewsWebSite_BLL.Services
         private readonly UserManager<AccountDB> _userManager;
         private readonly JwtHandler _jwtHandler;
         private readonly IUserService _userService;
+        private readonly IMemoryCache _cache;
 
         public AuthService(UserManager<AccountDB> userManager, JwtHandler jwtHandler,
-            IUserService userService)
+            IUserService userService, IMemoryCache cache)
         {
             _userManager = userManager;
             _jwtHandler = jwtHandler;
             _userService = userService;
+            _cache = cache;
         }
 
         public async Task<AuthResponse> LoginAsync(LoginModel model)
@@ -43,7 +46,7 @@ namespace NewsWebSite_BLL.Services
                 PhoneNumber = model.PhoneNumber,
 
             };
-            var addedProfile = _userService.AddNewUser(profile);
+            var addedProfile = await _userService.AddNewUserAsync(profile);
             AccountDB user = new AccountDB()
             {
                 FirstName = addedProfile.FullName,
@@ -56,13 +59,13 @@ namespace NewsWebSite_BLL.Services
             var createdUser = await _userManager.CreateAsync(user, model.Password);
             if (createdUser.Succeeded)
             {
+                _cache.Set(user.Id, user,
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
                 await _userManager.AddToRoleAsync(user, "User");
                 string token = await GenerateTokenAsync(user);
                 return new AuthResponse { IsAuthSuccessful = true, Token = token };
             }
             return new AuthResponse { IsAuthSuccessful = false, ErrorMessage = createdUser.Errors.First().Description };
-
-            
         }
 
         private async Task<string> GenerateTokenAsync(AccountDB user)

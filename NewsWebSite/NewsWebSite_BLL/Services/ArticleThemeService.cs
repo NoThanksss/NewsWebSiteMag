@@ -1,6 +1,6 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using NewsWebSite_BLL.Exceptions;
 using NewsWebSite_BLL.Interfaces;
@@ -16,21 +16,23 @@ namespace NewsWebSite_BLL.Services
         private readonly IArticleThemeRepository _articleThemeRepository;
         private readonly IArticleRepository _articleRepository;
         private readonly ILogger<ArticleThemeService> _logger;
+        private readonly IMemoryCache _cache;
 
         public ArticleThemeService(IMapper mapper, IArticleThemeRepository articleThemeRepository,
-            ILogger<ArticleThemeService> logger, IArticleRepository articleRepository)
+            ILogger<ArticleThemeService> logger, IArticleRepository articleRepository, IMemoryCache cache)
         {
             _mapper = mapper;
             _articleThemeRepository = articleThemeRepository;
             _logger = logger;
             _articleRepository = articleRepository;
+            _cache = cache;
         }
 
-        public IEnumerable<ArticleTheme> GetAllArticleThemes() 
+        public async Task<IEnumerable<ArticleTheme>> GetAllArticleThemesAsync() 
         {
             try 
             { 
-                return _mapper.Map<List<ArticleTheme>>(_articleThemeRepository.GetAll());
+                return _mapper.Map<List<ArticleTheme>>(await _articleThemeRepository.GetAllAsync().ToListAsync());
             }
             catch (Exception ex)
             {
@@ -39,14 +41,19 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public ArticleTheme AddNewArticleTheme(ArticleTheme articleTheme)
+        public async Task <ArticleTheme> AddNewArticleThemeAsync(ArticleTheme articleTheme)
         {
             try 
             { 
                 var articleThemeToAdd = _mapper.Map<ArticleThemeDB>(articleTheme);
-                var newarticleTheme = _articleThemeRepository.AddEntity(articleThemeToAdd);
+                var newArticleTheme = await _articleThemeRepository.AddEntityAsync(articleThemeToAdd);
+                if (newArticleTheme != null)
+                {
+                    _cache.Set(newArticleTheme.Id, newArticleTheme,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
 
-                return _mapper.Map<ArticleTheme>(newarticleTheme);
+                return _mapper.Map<ArticleTheme>(newArticleTheme);
             }
             catch (Exception ex)
             {
@@ -55,11 +62,12 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public void DeleteArticleTheme(Guid id)
+        public async Task DeleteArticleThemeAsync(Guid id)
         {
             try 
             { 
-                _articleThemeRepository.DeleteEntity(id);
+                await _articleThemeRepository.DeleteEntityAsync(id);
+                _cache.Remove(id);
             }
             catch (Exception ex)
             {
@@ -68,13 +76,19 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public ArticleTheme UpdateArticleTheme(ArticleTheme updatedarticleTheme)
+        public async Task <ArticleTheme> UpdateArticleThemeAsync(ArticleTheme updatedarticleTheme)
         {
             try 
             { 
-                var mappedarticleTheme = _mapper.Map<ArticleThemeDB>(updatedarticleTheme);
+                var mappedArticleTheme = _mapper.Map<ArticleThemeDB>(updatedarticleTheme);
+                var result = await _articleThemeRepository.UpdateEntityAsync(mappedArticleTheme);
+                if (result != null)
+                {
+                    _cache.Set(result.Id, result,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
 
-                return _mapper.Map<ArticleTheme>(_articleThemeRepository.UpdateEntity(mappedarticleTheme));
+                return _mapper.Map<ArticleTheme>(result);
             }
             catch (Exception ex)
             {
@@ -83,15 +97,21 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public ArticleTheme GetArticleThemeById(Guid id) 
+        public async Task<ArticleTheme> GetArticleThemeByIdAsync(Guid id) 
         {
             try 
-            { 
-                var articleTheme = _articleThemeRepository.GetById(id);
-                if (articleTheme == null)
+            {
+                ArticleThemeDB articleTheme = null;
+                if (!_cache.TryGetValue(id, out articleTheme))
                 {
-                    _logger.LogError($"ArticleTheme with id {id} doesn't exist.");
-                    throw new ArticleThemeServiceException($"ArticleTheme with id {id} doesn't exist.");
+                    articleTheme = await _articleThemeRepository.GetByIdAsync(id);
+                    if (articleTheme == null)
+                    {
+                        _logger.LogError($"ArticleTheme with id {id} doesn't exist.");
+                        throw new ArticleThemeServiceException($"ArticleTheme with id {id} doesn't exist.");
+                    }
+                    _cache.Set(articleTheme.Id, articleTheme,
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
                 }
 
                 return _mapper.Map<ArticleTheme>(articleTheme);
@@ -103,11 +123,12 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public IEnumerable<ArticleTheme> GetArticleThemesByArticleId(Guid articleId)
+        public async Task<IEnumerable<ArticleTheme>> GetArticleThemesByArticleIdAsync(Guid articleId)
         {
             try
             {
-                return _mapper.Map<List<ArticleTheme>>(_articleRepository.GetById(articleId).ArticleThemeDBs);
+                var article = await _articleRepository.GetByIdAsync(articleId);
+                return _mapper.Map<List<ArticleTheme>>(article.ArticleThemeDBs);
             }
             catch (Exception ex)
             {

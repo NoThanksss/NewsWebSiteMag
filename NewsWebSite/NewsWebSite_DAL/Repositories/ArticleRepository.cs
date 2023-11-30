@@ -15,28 +15,28 @@ namespace NewsWebSite_DAL.Repositories
             _dbSet = _context.Set<ArticleDB>();
         }
 
-        public IEnumerable<ArticleDB> GetAll()
+        public IQueryable<ArticleDB> GetAllAsync()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsQueryable();
         }
 
-        public IEnumerable<ArticleDB> GetAllWithThemeDbs()
+        public IQueryable<ArticleDB> GetAllWithThemeDbsAsync()
         {
-            return _dbSet.Include(x => x.ArticleThemeDBs).ToList();
+            return _dbSet.Include(x => x.ArticleThemeDBs).AsQueryable();
         }
 
-        public ArticleDB UpdateEntity(ArticleDB entity)
+        public async Task<ArticleDB> UpdateEntityAsync(ArticleDB entity)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public ArticleDB UpdateThemes(ArticleDB entity, List<Guid> themesToAdd, List<Guid> themesToRemove)
+        public async Task<ArticleDB> UpdateThemesAsync(ArticleDB entity, List<Guid> themesToAdd, List<Guid> themesToRemove)
         {
 
-            var article = _context.ArticleDBs.Include(x => x.ArticleThemeDBs).FirstOrDefault(x => x.Id == entity.Id);
+            var article = await GetByIdAsync(entity.Id);
             for (int i = 0; i < themesToRemove.Count; i++)
             {
                 var theme = article.ArticleThemeDBs.FirstOrDefault(x => x.Id == themesToRemove[i]);
@@ -60,27 +60,27 @@ namespace NewsWebSite_DAL.Repositories
             }
 
             _context.Entry(article).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public ArticleDB AddEntity(ArticleDB entity)
+        public async Task<ArticleDB> AddEntityAsync(ArticleDB entity)
         {
-            _dbSet.Add(entity);
-            _context.SaveChanges();
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public ArticleDB GetById(Guid id)
+        public async Task<ArticleDB> GetByIdAsync(Guid id)
         {
-            return _dbSet.Include(x => x.ArticleThemeDBs).First(x => x.Id == id);
+            return await _dbSet.Include(x => x.ArticleThemeDBs).FirstAsync(x => x.Id == id);
         }
 
-        public Task DeleteEntity(Guid id)
+        public async Task DeleteEntityAsync(Guid id)
         {
-            var entityToRemove = _dbSet.Find(id);
+            var entityToRemove = await _dbSet.FindAsync(id);
             _context.Entry<ArticleDB>(entityToRemove).State = EntityState.Deleted;
             var comments = _context.CommentDBs.Where(x => x.ArticleId == entityToRemove.Id);
             foreach (var comment in comments)
@@ -88,7 +88,7 @@ namespace NewsWebSite_DAL.Repositories
                 _context.Entry(comment).State = EntityState.Deleted;
             }
 
-            return Task.FromResult(_context.SaveChanges());
+            await _context.SaveChangesAsync();
         }
     }
 }

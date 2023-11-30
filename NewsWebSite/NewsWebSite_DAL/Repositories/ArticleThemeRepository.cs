@@ -20,43 +20,43 @@ namespace NewsWebSite_DAL.Repositories
             _dbSet = _context.Set<ArticleThemeDB>();
         }
 
-        public IEnumerable<ArticleThemeDB> GetAll()
+        public IQueryable<ArticleThemeDB> GetAllAsync()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsQueryable();
         }
 
-        public IEnumerable<ArticleThemeDB> GetAllWithArticles()
+        public async Task<IEnumerable<ArticleThemeDB>> GetAllWithArticlesAsync()
         {
-            return _dbSet.Include(x => x.ArticleDBs).ToList();
+            return await _dbSet.Include(x => x.ArticleDBs).ToListAsync();
         }
 
-        public ArticleThemeDB UpdateEntity(ArticleThemeDB entity)
+        public async Task<ArticleThemeDB> UpdateEntityAsync(ArticleThemeDB entity)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public ArticleThemeDB AddEntity(ArticleThemeDB entity)
+        public async Task<ArticleThemeDB> AddEntityAsync(ArticleThemeDB entity)
         {
-            _dbSet.Add(entity);
-            _context.SaveChanges();
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public ArticleThemeDB GetById(Guid id)
+        public async Task<ArticleThemeDB> GetByIdAsync(Guid id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public Task DeleteEntity(Guid id)
+        public async Task DeleteEntityAsync(Guid id)
         {
-            var entityToRemove = _dbSet.Find(id);
+            var entityToRemove = await _dbSet.FindAsync(id);
             _dbSet.Remove(entityToRemove);
 
-            return Task.FromResult(_context.SaveChanges());
+            await _context.SaveChangesAsync();
         }
     }
 }

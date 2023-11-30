@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NewsWebSite_DAL.Models;
 
 namespace NewsWebSite_DAL.Interfaces
 {
     public interface IBaseRepository<TEntity>
     {
-        IEnumerable<TEntity> GetAll();
+        IQueryable<TEntity> GetAllAsync();
 
-        TEntity UpdateEntity(TEntity entity);
+        Task<TEntity> UpdateEntityAsync(TEntity entity);
 
-        TEntity AddEntity(TEntity entity);
+        Task<TEntity> AddEntityAsync(TEntity entity);
 
-        TEntity GetById(Guid id);
+        Task<TEntity> GetByIdAsync(Guid id);
 
-        Task DeleteEntity(Guid id);
+        Task DeleteEntityAsync(Guid id);
     }
 }

@@ -9,11 +9,11 @@ namespace NewsWebSite_BLL.Interfaces
 {
     public interface ICommentService
     {
-        IEnumerable<Comment> GetAllComments();
-        Comment AddNewComment(Comment comment);
-        void DeleteComment(Guid id);
-        Comment UpdateComment(Comment updatedComment);
-        Comment GetCommentById(Guid id);
-        IEnumerable<Comment> GetCommentsByArticleId(Guid articleId);
+        Task<IEnumerable<Comment>> GetAllCommentsAsync();
+        Task<Comment> AddNewCommentAsync(Comment comment);
+        Task DeleteCommentAsync(Guid id);
+        Task<Comment> UpdateCommentAsync(Comment updatedComment);
+        Task<Comment> GetCommentByIdAsync(Guid id);
+        Task<IEnumerable<Comment>> GetCommentsByArticleIdAsync(Guid articleId);
     }
 }

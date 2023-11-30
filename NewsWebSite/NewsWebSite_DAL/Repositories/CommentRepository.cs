@@ -20,38 +20,38 @@ namespace NewsWebSite_DAL.Repositories
             _dbSet = _context.Set<CommentDB>();
         }
 
-        public IEnumerable<CommentDB> GetAll()
+        public IQueryable<CommentDB> GetAllAsync()
         {
-            return _dbSet.ToList();
+            return _dbSet.AsQueryable();
         }
 
-        public CommentDB UpdateEntity(CommentDB entity)
+        public async Task<CommentDB> UpdateEntityAsync(CommentDB entity)
         {
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public CommentDB AddEntity(CommentDB entity)
+        public async Task<CommentDB> AddEntityAsync(CommentDB entity)
         {
-            _dbSet.Add(entity);
-            _context.SaveChanges();
+            await _dbSet.AddAsync(entity);
+            await _context.SaveChangesAsync();
 
             return entity;
         }
 
-        public CommentDB GetById(Guid id)
+        public async Task<CommentDB> GetByIdAsync(Guid id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
 
-        public Task DeleteEntity(Guid id)
+        public async Task DeleteEntityAsync(Guid id)
         {
-            var entityToRemove = _dbSet.Find(id);
+            var entityToRemove = await _dbSet.FindAsync(id);
             _dbSet.Remove(entityToRemove);
 
-            return Task.FromResult(_context.SaveChanges());
+            await _context.SaveChangesAsync();
         }
     }
 }

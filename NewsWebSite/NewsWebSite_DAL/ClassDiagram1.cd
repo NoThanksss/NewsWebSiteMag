@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NewsWebSite_DAL.Repositories.UserRepository">
+    <Position X="9.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAACAABAAAAAAAIAACAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_DAL.Repositories.CommentRepository">
+    <Position X="5.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAACAABAAAAAAAIAACAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Repositories\CommentRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_DAL.Repositories.AccountRepository" BaseTypeListCollapsed="true">
+    <Position X="3" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAACAABAAAAAAAIAACAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Repositories\AccountRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_DAL.Repositories.ArticleRepository" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAACAABAAAAAAAIAACAAEAAAAAAAAIAAAAIAA=</HashCode>
+      <FileName>Repositories\ArticleRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite_DAL.Repositories.ArticleThemeRepository" BaseTypeListCollapsed="true">
+    <Position X="12" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAACAABAAAAAAAIAACAAAAAAAACAAAAAAAIAA=</HashCode>
+      <FileName>Repositories\ArticleThemeRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.252" />
+  </Class>
+  <Class Name="NewsWebSite_DAL.Models.AccountDB">
+    <Position X="2.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAQQIAAAAg=</HashCode>
+      <FileName>Models\AccountDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_DAL.Models.ArticleDB">
+    <Position X="7.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAgAEAgAgAAAAAAAAAAAAAAABAACAAAAAA=</HashCode>
+      <FileName>Models\ArticleDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_DAL.Models.ArticleThemeDB">
+    <Position X="12" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgCAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ArticleThemeDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_DAL.Models.CommentDB">
+    <Position X="5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAgAAAAAAAAAAAAAAgAAACAAAAAA=</HashCode>
+      <FileName>Models\CommentDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_DAL.Models.NewsSiteRole" Collapsed="true">
+    <Position X="14.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\NewsSiteRole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_DAL.Models.UserDB">
+    <Position X="9.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAICAAAAAQAQAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\UserDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite_DAL.NewsDbContext">
+    <Position X="14.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAgAAAgAAAAEAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>NewsDbContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="NewsWebSite_DAL.Interfaces.IAccountRepository" Collapsed="true">
+    <Position X="3" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAccountRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_DAL.Interfaces.IArticleRepository">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Interfaces\IArticleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_DAL.Interfaces.IArticleThemeRepository">
+    <Position X="12" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IArticleThemeRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_DAL.Interfaces.IBaseRepository&lt;TEntity&gt;">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAAAACAAAAAAAAAAAAACAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Interfaces\IBaseRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_DAL.Interfaces.ICommentRepository" Collapsed="true">
+    <Position X="5.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICommentRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NewsWebSite_DAL.Interfaces.IUserRepository" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IUserRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

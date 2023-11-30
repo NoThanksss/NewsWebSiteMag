@@ -24,11 +24,6 @@ export const options = {
   },
 };
 
-// export const options = {
-//   vus: 10,
-//   duration: "30s",
-// };
-
 export default function () {
   const random_uuid = Math.floor(Math.random() * 999999);
 

@@ -26,7 +26,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _commentService.AddNewComment(Comment);
+                var result = await _commentService.AddNewCommentAsync(Comment);
 
                 return Ok(result);
             }
@@ -47,7 +47,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _commentService.UpdateComment(Comment);
+                var result = await _commentService.UpdateCommentAsync(Comment);
 
                 return Ok(result);
             }
@@ -68,7 +68,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                _commentService.DeleteComment(id);
+                await _commentService.DeleteCommentAsync(id);
 
                 return Ok("Comment was deleted");
             }
@@ -89,7 +89,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _commentService.GetAllComments();
+                var result = await _commentService.GetAllCommentsAsync();
 
                 return Ok(result);
             }
@@ -110,7 +110,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _commentService.GetCommentById(id);
+                var result = await _commentService.GetCommentByIdAsync(id);
 
                 return Ok(result);
             }
@@ -131,7 +131,7 @@ namespace NewsWebSite.Controllers
         {
             try
             {
-                var result = _commentService.GetCommentsByArticleId(id);
+                var result = await _commentService.GetCommentsByArticleIdAsync(id);
 
                 return Ok(result);
             }

@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NewsWebSite.Controllers.AccountsController">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgEAAAAAAAAAAAAAAQAAAIAACAAAAAAAAAQIAAAA=</HashCode>
+      <FileName>Controllers\AccountsController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Controllers.ArticleController">
+    <Position X="6.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEQAIAQAQAAgABAAAIAAAAIIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\ArticleController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Controllers.ArticleThemeController">
+    <Position X="10.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAEABEAAAAAIAACAAAAAAAAAAQABAA=</HashCode>
+      <FileName>Controllers\ArticleThemeController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Controllers.AuthController">
+    <Position X="8.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgIAABAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Controllers\AuthController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Controllers.CommentController">
+    <Position X="12" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAABAAgBAQAAAIAAgAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Controllers\CommentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Controllers.UsersController">
+    <Position X="13.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAEAAAAAAAAIQAAAAAAAAAEAAEAAAA=</HashCode>
+      <FileName>Controllers\UsersController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Models.CompactJsonFormatter" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAgAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CompactJsonFormatter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NewsWebSite.Models.LogModel">
+    <Position X="10.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIABAIAACAAA=</HashCode>
+      <FileName>Models\LogModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NewsWebSite.Logging.Destructure.ArrayStrategy" BaseTypeListCollapsed="true">
+    <Position X="13" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAEAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging\Destructure\ArrayStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite.Logging.Destructure.ObjectStrategy" BaseTypeListCollapsed="true">
+    <Position X="6" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAEAAAgAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Logging\Destructure\ObjectStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NewsWebSite.Logging.Destructure.RemoveFromLoggingStrategy" BaseTypeListCollapsed="true">
+    <Position X="7.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAEAAAIAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Logging\Destructure\RemoveFromLoggingStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite.Logging.Destructure.SensitiveDataDestructuringPolicy" BaseTypeListCollapsed="true">
+    <Position X="9.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging\Destructure\SensitiveDataDestructuringPolicy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite.Logging.Destructure.SerializableStrategy" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging\Destructure\SerializableStrategy.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite.Filters.SwaggerExcludeFilter" BaseTypeListCollapsed="true">
+    <Position X="5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Filters\SwaggerExcludeFilter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NewsWebSite.Program" Collapsed="true">
+    <Position X="6.75" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>diagram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="NewsWebSite.Logging.Destructure.ISensitiveDataStrategy" Collapsed="true">
+    <Position X="9.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logging\Destructure\ISensitiveDataStrategy.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

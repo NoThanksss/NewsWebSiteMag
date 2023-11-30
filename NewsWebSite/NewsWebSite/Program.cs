@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NewsWebSite.Filters;
+using NewsWebSite.Logging.Destructure;
+using NewsWebSite.Models;
 using NewsWebSite_BLL.Builders;
 using NewsWebSite_DAL.Interfaces;
 using NewsWebSite_DAL.Models;
-using NewsWebSite_DAL.Repositories;
+using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +17,22 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+
+var logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Warning)
+                .Enrich.FromLogContext()
+                .Enrich.WithCorrelationIdHeader("X-Correlation-ID")
+                .Destructure.With(new SensitiveDataDestructuringPolicy())
+                .WriteTo.Console(new CompactJsonFormatter())
+                .CreateLogger();
+
+builder.Services.AddLogging(logging =>
+{
+    logging.ClearProviders();
+    logging.AddSerilog(logger);
+});
+
 builder.Services.AddAuthentication();
 
 builder.Services.ConfigureDataBase();

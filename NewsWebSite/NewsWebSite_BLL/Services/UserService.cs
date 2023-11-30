@@ -1,13 +1,13 @@
-﻿
-
-using AutoMapper;
+﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using NewsWebSite_BLL.Exceptions;
 using NewsWebSite_BLL.Interfaces;
 using NewsWebSite_BLL.Models;
 using NewsWebSite_DAL.Interfaces;
 using NewsWebSite_DAL.Models;
-using NewsWebSite_DAL.Repositories;
 
 namespace NewsWebSite_BLL.Services
 {
@@ -16,20 +16,22 @@ namespace NewsWebSite_BLL.Services
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly ILogger<UserService> _logger;
+        private readonly IMemoryCache _cache;
 
-        public UserService(IMapper mapper, IUserRepository userRepository, ILogger<UserService> logger)
+        public UserService(IMapper mapper, IUserRepository userRepository, ILogger<UserService> logger, IMemoryCache cache)
         {
             _mapper = mapper;
             _userRepository = userRepository;
             _logger = logger;
+            _cache = cache;
 
         }
 
-        public IEnumerable<User> GetAllUsers() 
+        public async Task<IEnumerable<User>> GetAllUsersAsync() 
         {
             try 
             { 
-                return _mapper.Map<List<User>>(_userRepository.GetAll());
+                return _mapper.Map<List<User>>(await _userRepository.GetAllAsync().ToListAsync());
             }
             catch (Exception ex)
             {
@@ -38,13 +40,17 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public User AddNewUser(User user)
+        public async Task<User> AddNewUserAsync(User user)
         {
             try 
             { 
                 var userToAdd = _mapper.Map<UserDB>(user);
-                var newUser = _userRepository.AddEntity(userToAdd);
-
+                var newUser = await _userRepository.AddEntityAsync(userToAdd);
+                if (newUser != null)
+                {
+                    _cache.Set(newUser.Id, newUser,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
                 return _mapper.Map<User>(newUser);
             }
             catch (Exception ex)
@@ -54,11 +60,12 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public void DeleteUser(Guid id)
+        public async Task DeleteUserAsync(Guid id)
         {
             try 
             { 
-                _userRepository.DeleteEntity(id);
+                await _userRepository.DeleteEntityAsync(id);
+                _cache.Remove(id);
             }
             catch (Exception ex)
             {
@@ -67,13 +74,19 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public User UpdateUser(User updatedUser)
+        public async Task<User> UpdateUserAsync(User updatedUser)
         {
             try 
             { 
                 var mappedUser = _mapper.Map<UserDB>(updatedUser);
+                var result = await _userRepository.UpdateEntityAsync(mappedUser);
+                if (result != null)
+                {
+                    _cache.Set(result.Id, result,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                }
 
-                return _mapper.Map<User>(_userRepository.UpdateEntity(mappedUser));
+                return _mapper.Map<User>(result);
             }
             catch (Exception ex)
             {
@@ -82,15 +95,22 @@ namespace NewsWebSite_BLL.Services
             }
         }
 
-        public User GetUserById(Guid id) 
+        public async Task<User> GetUserByIdAsync(Guid id) 
         {
             try 
-            { 
-                var user = _userRepository.GetById(id);
-                if (user == null)
+            {
+                UserDB user = null;
+                if (!_cache.TryGetValue(id, out user))
                 {
-                    _logger.LogError($"User with id {id} doesn't exist.");
-                    throw new UserServiceException($"User with id {id} doesn't exist.");
+                    user = await _userRepository.GetByIdAsync(id);
+                    if (user == null)
+                    {
+                        _logger.LogError($"User with id {id} doesn't exist.");
+                        throw new UserServiceException($"User with id {id} doesn't exist.");
+                    }
+
+                    _cache.Set(user.Id, user,
+                        new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
                 }
 
                 return _mapper.Map<User>(user);

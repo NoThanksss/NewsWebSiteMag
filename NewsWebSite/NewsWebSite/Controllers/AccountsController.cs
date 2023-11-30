@@ -25,7 +25,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                var result = _accountService.UpdateAccount(country);
+                var result = await _accountService.UpdateAccountAsync(country);
 
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                _accountService.DeleteAccount(id);
+                await _accountService.DeleteAccountAsync(id);
 
                 return Ok("Account was deleted");
             }
@@ -68,7 +68,7 @@ namespace NewsWebSite.Controllers
         {
             try 
             { 
-                var result = _accountService.GetAllAccounts();
+                var result = await _accountService.GetAllAccountsAsync();
 
                 return Ok(result);
             }
@@ -105,13 +105,12 @@ namespace NewsWebSite.Controllers
             }
         }
 
-
         [HttpPatch("subscribe")]
         public async Task<IActionResult> Subscribe([FromBody] SubscribeModel subModel)
         {
             try
             {
-                _accountService.Subscribe(subModel.authorId, subModel.subscriberId);
+                await _accountService.Subscribe(subModel.authorId, subModel.subscriberId);
 
                 return Ok();
             }
